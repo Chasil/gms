@@ -4,31 +4,21 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  var g_name = document.getElementById('g_name');
+  let copyData = document.getElementById('copyData');
+  let pasteAddress = document.getElementById('pasteAddress');
+  let pasteItem = document.getElementById('pasteItem');
 
-  copyData.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+  copyData.addEventListener("click", function(request, sender, sendResponse) {
 
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+
+      console.log(23424);
+
       chrome.tabs.sendMessage(tabs[0].id, {type: "popup-copy"}, function(response) {
-        console.log(response);
+          console.log(response);
       });
     });
 
   }, false);
-
-  pasteAddress.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    alert(6676);
-
-  });
-
-  pasteItem.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    alert(987);
-
-  });
 
 });
