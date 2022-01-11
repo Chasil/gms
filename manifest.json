@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage", "activeTab", "tabs",  "scripting", "<all_urls>", "http://poczta.wp.pl/*"],
+  "permissions": ["storage", "activeTab", "tabs",  "scripting"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
