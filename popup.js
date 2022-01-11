@@ -24,15 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   pasteAddress.addEventListener("click", function(request, sender, sendResponse) {
 
-    console.log(2343442);
-
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-
-      chrome.tabs.sendMessage(tabs[0].id, {type: "popup-paste"}, function(response) {
-
-      });
-
-    });
+    chrome.runtime.sendMessage({type: 'popup-paste'});
 
   }, false);
 

@@ -30,10 +30,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if(message.type === 'popup-paste') {
 
         console.log('wklejanie');
-        // console.log(message);
+        console.log(message.text);
 
         jQuery('div.vs-con-input-label:nth-child(1) > div:nth-child(2) > input:nth-child(1)').val('Klient');
 
+        sendResponse({'asdf' : 'terterter'});
 
     }
 });
