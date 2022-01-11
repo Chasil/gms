@@ -5,6 +5,10 @@
 let data;
 
 chrome.runtime.onMessage.addListener(function(message, sender) {
+
+    console.log(message);
+    console.log(12345);
+
     if(message.type == 'runtime-copy') {
         data = message.text;
     }
