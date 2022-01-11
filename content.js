@@ -10,13 +10,14 @@ let userData;
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
-    console.log(message.type);
+    console.log('message w content');
+    console.log(message);
 
     if(message.type === 'popup-copy') {
 
         let contentHTML = document.all[0].outerHTML;
 
-        console.log('kopiowanie');
+        console.log('kopiowanie7');
 
         let g_name = jQuery('#g_name').text();
 
@@ -24,15 +25,19 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
         let userData = {};
 
-        userData = { g_name : g_name };
+        userData['user-data'] = { g_name : g_name };
+
+        console.log(userData);
+        console.log(8899);
 
         chrome.runtime.sendMessage({type: 'runtime-copy', text: userData});
     }
 
     if(message.type === 'popup-paste') {
 
-        console.log('wklejanie');
+        console.log(23432);
         console.log(message);
+        console.log('wklejanie');
 
         jQuery('div.vs-con-input-label:nth-child(1) > div:nth-child(2) > input:nth-child(1)').val('Klient');
 
