@@ -1,7 +1,3 @@
-/*
- * RUNTIME to taki schowek, który przechowuje dane wymieniane pomiędzy kopiuj i wklej
- */
-
 let data;
 
 chrome.runtime.onMessage.addListener(function(message, sender) {
