@@ -10,10 +10,32 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         let contentHTML = document.all[0].outerHTML;
 
         let g_name = jQuery('#g_name').text();
+        let g_lastname = jQuery('#g_lastname').text();
+        let g_company = jQuery('#g_company').text();
+        let g_land = jQuery('#g_land').text();
+        let g_postcode = jQuery('#g_postcode').text();
+        let g_city = jQuery('#g_city').text();
+        let g_address = jQuery('#g_address').text();
+        let g_phone = jQuery('#g_phone').text();
+        let g_fax = jQuery('#g_fax').text();
+        let g_email = jQuery('#g_email').text();
 
         let userData = {};
 
-        userData['user-data'] = { g_name : g_name };
+        userData['user-data'] = {
+            g_name: g_name ,
+            g_lastname: g_lastname,
+            g_company: g_company,
+            g_land: g_land,
+            g_postcode: g_postcode,
+            g_city: g_city,
+            g_address: g_address,
+            g_phone: g_phone,
+            g_fax: g_fax,
+            g_email: g_email
+
+        };
+
 
         chrome.runtime.sendMessage({type: 'runtime-copy', text: userData});
     }
