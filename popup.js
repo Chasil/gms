@@ -1,25 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  let copyData = document.getElementById('copyData');
-  let pasteAddress = document.getElementById('pasteAddress');
-  let pasteItem = document.getElementById('pasteItem');
+  const copyData = document.getElementById('copyData');
+  const pasteAddress = document.getElementById('pasteAddress');
 
-  copyData.addEventListener("click", function(request, sender, sendResponse) {
-
+  copyData.addEventListener("click", function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-
-      chrome.tabs.sendMessage(tabs[0].id, {type: "popup-copy"}, function(response) {
-        console.log(response);
-      });
-
+      chrome.tabs.sendMessage(tabs[0].id, {type: "popup-copy"}, function() {});
     });
-
   }, false);
 
-  pasteAddress.addEventListener("click", function(request, sender, sendResponse) {
-
-    chrome.runtime.sendMessage({type: 'popup-paste'});
-
+  pasteAddress.addEventListener("click", function() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {type: "popup-paste"}, function() {});
+    });
   }, false);
 
 });
