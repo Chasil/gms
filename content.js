@@ -23,8 +23,14 @@ const gms = {
         chrome.runtime.sendMessage({
             type: 'runtime-paste'
         }, (userData) => {
-            console.log(userData);
-            jQuery('div.vs-con-input-label:nth-child(1) > div:nth-child(2) > input:nth-child(1)').val('Klient');
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(1) > div > input').val(userData.g_name)[0].dispatchEvent(new Event('input'));
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(2) > div > input').val(userData.g_company)[0].dispatchEvent(new Event('input'));
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(4) > div > input').val(userData.g_address)[0].dispatchEvent(new Event('input'));
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(5) > div > input').val(userData.g_postcode)[0].dispatchEvent(new Event('input'));
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(6) > div > input').val(userData.g_city)[0].dispatchEvent(new Event('input'));
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(7) > div > input').val('Niemcy')[0].dispatchEvent(new Event('input'));
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(8) > div > input').val(userData.g_phone)[0].dispatchEvent(new Event('input'));
+            jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(9) > div > input').val(userData.g_email)[0].dispatchEvent(new Event('input'));
         });
     }
 }
