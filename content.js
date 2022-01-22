@@ -43,6 +43,9 @@ const gms = {
             type: 'runtime-paste-item'
         }, (userData) => {
 
+            let firstSelect = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div > div.vue-treeselect__control > div.vue-treeselect__value-container";
+            let chosenOption = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div > div.vue-treeselect__menu-container > div > div > div:nth-child(2) > div > div.vue-treeselect__label-container > label";
+
             function simulateMouseClick(targetNode) {
                 function triggerMouseEvent(targetNode, eventType) {
                     var clickEvent = document.createEvent('MouseEvents');
@@ -53,8 +56,8 @@ const gms = {
                     triggerMouseEvent(targetNode, eventType);
                 });
             }
-            simulateMouseClick(document.querySelector(".vue-treeselect__single-value"));
-            console.log(userData);
+            simulateMouseClick(document.querySelector(firstSelect));
+            setTimeout(simulateMouseClick(document.querySelector(chosenOption)));
         });
     }
 }
