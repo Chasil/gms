@@ -15,7 +15,12 @@ const gms = {
                 g_address: jQuery('#g_address').text(),
                 g_phone: jQuery('#g_phone').text(),
                 g_fax: jQuery('#g_fax').text(),
-                g_email: jQuery('#g_email').text()
+                g_email: jQuery('#g_email').text(),
+                g_productname: jQuery('#g_productname').text(),
+                g_productchoice: jQuery('#g_productchoice').text(),
+                g_width: jQuery('#g_width').text(),
+                g_height: jQuery('#g_height').text(),
+                g_montage: jQuery('#g_montage').text(),
             }}
         );
     },
@@ -32,6 +37,25 @@ const gms = {
             jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(8) > div > input').val(userData.g_phone)[0].dispatchEvent(new Event('input'));
             jQuery('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(9) > div > input').val(userData.g_email)[0].dispatchEvent(new Event('input'));
         });
+    },
+    paste_item: () => {
+        chrome.runtime.sendMessage({
+            type: 'runtime-paste-item'
+        }, (userData) => {
+
+            function simulateMouseClick(targetNode) {
+                function triggerMouseEvent(targetNode, eventType) {
+                    var clickEvent = document.createEvent('MouseEvents');
+                    clickEvent.initEvent(eventType, true, true);
+                    targetNode.dispatchEvent(clickEvent);
+                }
+                ["mouseover", "mousedown", "mouseup", "click"].forEach(function(eventType) {
+                    triggerMouseEvent(targetNode, eventType);
+                });
+            }
+            simulateMouseClick(document.querySelector(".vue-treeselect__single-value"));
+            console.log(userData);
+        });
     }
 }
 
@@ -43,6 +67,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
             break;
         case 'popup-paste':
             gms.paste();
+            break;
+        case 'popup-paste-item':
+            gms.paste_item();
             break;
     }
 

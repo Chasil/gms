@@ -5,6 +5,9 @@ const gms = {
     },
     paste: () => {
         return this.userData;
+    },
+    paste_item: () => {
+        return this.userData;
     }
 }
 
@@ -15,6 +18,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             break;
         case 'runtime-paste':
             sendResponse(gms.paste());
+            break;
+        case 'runtime-paste-item':
+            sendResponse(gms.paste_item());
             break;
     }
 });
