@@ -44,9 +44,13 @@ const gms = {
         }, (userData) => {
 
             let firstSelect = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div > div.vue-treeselect__control > div.vue-treeselect__value-container";
-            let chosenOption = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div > div.vue-treeselect__menu-container > div > div > div:nth-child(2) > div > div.vue-treeselect__label-container > label";
+            let firstSelectChosenOption = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div > div.vue-treeselect__menu-container > div > div > div:nth-child(2) > div > div.vue-treeselect__label-container > label";
+            let secondSelect = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(2) > div > div.vue-treeselect__control > div.vue-treeselect__value-container";
+            let secondSelectChosenOption = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(2) > div > div.vue-treeselect__menu-container > div > div > div:nth-child(1) > div > div > div > p";
+            let thirdSelect = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div.mb-5 > div > div.vue-treeselect__control > div.vue-treeselect__value-container";
+            let thirdSelectChosenOption = "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div.mb-5 > div > div.vue-treeselect__menu-container > div > div > div > div > div";
 
-            function simulateMouseClick(targetNode) {
+            async function simulateMouseClick(targetNode) {
                 function triggerMouseEvent(targetNode, eventType) {
                     var clickEvent = document.createEvent('MouseEvents');
                     clickEvent.initEvent(eventType, true, true);
@@ -56,8 +60,13 @@ const gms = {
                     triggerMouseEvent(targetNode, eventType);
                 });
             }
-            simulateMouseClick(document.querySelector(firstSelect));
-            setTimeout(simulateMouseClick(document.querySelector(chosenOption)));
+            await simulateMouseClick(document.querySelector(firstSelect));
+            await simulateMouseClick(document.querySelector(firstSelectChosenOption));
+            await simulateMouseClick(document.querySelector(secondSelect));
+            await simulateMouseClick(document.querySelector(secondSelectChosenOption));
+            await simulateMouseClick(document.querySelector(thirdSelect));
+            await simulateMouseClick(document.querySelector(thirdSelectChosenOption));
+
         });
     }
 }
