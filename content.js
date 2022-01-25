@@ -86,6 +86,8 @@ const gms = {
             await this.simulateMouseClick(this.secondSelectChosenOption);
             await this.simulateMouseClick(this.thirdSelect);
             await this.simulateMouseClick(this.thirdSelectChosenOption);
+            $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > table > tr:nth-child(8) > td:nth-child(2) > div > input').val(userData.g_width)[0].dispatchEvent(new Event('input'));
+            $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > table > tr:nth-child(9) > td:nth-child(2) > div > input').val(userData.g_height)[0].dispatchEvent(new Event('input'));
         });
     }
 }
