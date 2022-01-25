@@ -51,6 +51,7 @@ const gms = {
                     clearInterval(waitForQuerySelector);
                     resolve(querySelector);
                 } else if (tries > 50) {
+                    clearInterval(waitForQuerySelector);
                     throw new Error('selector not found');
                 }
                 tries += 1;
