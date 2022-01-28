@@ -10,33 +10,33 @@ const gms = {
         chrome.runtime.sendMessage({
             type: 'runtime-copy',
             userData: {
-                g_name: jQuery(iframeData).contents().find("html").find('#g_name').text(),
-                g_lastname: jQuery(iframeData).contents().find("html").find('#g_lastname').text(),
-                g_company: jQuery(iframeData).contents().find("html").find('#g_company').text(),
-                g_land: jQuery(iframeData).contents().find("html").find('#g_land').text(),
-                g_postcode: jQuery(iframeData).contents().find("html").find('#g_postcode').text(),
-                g_city: jQuery(iframeData).contents().find("html").find('#g_city').text(),
-                g_address: jQuery(iframeData).contents().find("html").find('#g_address').text(),
-                g_phone: jQuery(iframeData).contents().find("html").find('#g_phone').text(),
-                g_fax: jQuery(iframeData).contents().find("html").find('#g_fax').text(),
-                g_email: jQuery(iframeData).contents().find("html").find('#g_email').text(),
-                g_productname: jQuery(iframeData).contents().find("html").find('#g_productname').text(),
-                g_productchoice: jQuery(iframeData).contents().find("html").find('#g_productchoice').text(),
-                g_width: jQuery(iframeData).contents().find("html").find('#g_width').text(),
-                g_height: jQuery(iframeData).contents().find("html").find('#g_height').text(),
-                g_montage: jQuery(iframeData).contents().find("html").find('#g_montage').text(),
-                g_embossing: jQuery(iframeData).contents().find("html").find('#g_embossing').text(),
-                g_insulation: jQuery(iframeData).contents().find("html").find('#g_insulation').text(),
-                g_division: jQuery(iframeData).contents().find("html").find('#g_division').text(),
-                g_opening: jQuery(iframeData).contents().find("html").find('#g_opening').text(),
-                g_threshold: jQuery(iframeData).contents().find("html").find('#g_threshold').text(),
-                g_shell: jQuery(iframeData).contents().find("html").find('#g_shell').text(),
-                g_frame: jQuery(iframeData).contents().find("html").find('#g_frame').text(),
-                g_window: jQuery(iframeData).contents().find("html").find('#g_window').text(),
-                g_window_color: jQuery(iframeData).contents().find("html").find('#g_window_color').text(),
-                g_vent: jQuery(iframeData).contents().find("html").find('#g_vent').text(),
-                g_vent_color: jQuery(iframeData).contents().find("html").find('#g_vent_color').text(),
-                g_hardware: jQuery(iframeData).contents().find("html").find('#g_hardware').text(),
+                g_name: jQuery(this.iframeData).contents().find("html").find('#g_name').text(),
+                g_lastname: jQuery(this.iframeData).contents().find("html").find('#g_lastname').text(),
+                g_company: jQuery(this.iframeData).contents().find("html").find('#g_company').text(),
+                g_land: jQuery(this.iframeData).contents().find("html").find('#g_land').text(),
+                g_postcode: jQuery(this.iframeData).contents().find("html").find('#g_postcode').text(),
+                g_city: jQuery(this.iframeData).contents().find("html").find('#g_city').text(),
+                g_address: jQuery(this.iframeData).contents().find("html").find('#g_address').text(),
+                g_phone: jQuery(this.iframeData).contents().find("html").find('#g_phone').text(),
+                g_fax: jQuery(this.iframeData).contents().find("html").find('#g_fax').text(),
+                g_email: jQuery(this.iframeData).contents().find("html").find('#g_email').text(),
+                g_productname: jQuery(this.iframeData).contents().find("html").find('#g_productname').text(),
+                g_productchoice: jQuery(this.iframeData).contents().find("html").find('#g_productchoice').text(),
+                g_width: jQuery(this.iframeData).contents().find("html").find('#g_width').text(),
+                g_height: jQuery(this.iframeData).contents().find("html").find('#g_height').text(),
+                g_montage: jQuery(this.iframeData).contents().find("html").find('#g_montage').text(),
+                g_embossing: jQuery(this.iframeData).contents().find("html").find('#g_embossing').text(),
+                g_insulation: jQuery(this.iframeData).contents().find("html").find('#g_insulation').text(),
+                g_division: jQuery(this.iframeData).contents().find("html").find('#g_division').text(),
+                g_opening: jQuery(this.iframeData).contents().find("html").find('#g_opening').text(),
+                g_threshold: jQuery(this.iframeData).contents().find("html").find('#g_threshold').text(),
+                g_shell: jQuery(this.iframeData).contents().find("html").find('#g_shell').text(),
+                g_frame: jQuery(this.iframeData).contents().find("html").find('#g_frame').text(),
+                g_window: jQuery(this.iframeData).contents().find("html").find('#g_window').text(),
+                g_window_color: jQuery(this.iframeData).contents().find("html").find('#g_window_color').text(),
+                g_vent: jQuery(this.iframeData).contents().find("html").find('#g_vent').text(),
+                g_vent_color: jQuery(this.iframeData).contents().find("html").find('#g_vent_color').text(),
+                g_hardware: jQuery(this.iframeData).contents().find("html").find('#g_hardware').text(),
             }}
         );
     },
@@ -44,6 +44,7 @@ const gms = {
         chrome.runtime.sendMessage({
             type: 'runtime-paste'
         }, (userData) => {
+            console.log(userData);
             let selectorPrefix = 'div.vs-sidebar--items > section > div.p-6 > div > ';
             $(selectorPrefix + 'div:nth-child(1) > div > input').val(userData.g_name)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(2) > div > input').val(userData.g_company)[0].dispatchEvent(new Event('input'));
