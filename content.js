@@ -6,7 +6,7 @@ const gms = {
     thirdSelect: "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div.mb-5 > div > div.vue-treeselect__control > div.vue-treeselect__value-container",
     thirdSelectChosenOption: "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div.mb-5 > div > div.vue-treeselect__menu-container > div > div > div > div > div",
     iframeData: "body > div.main.threads > div.content.ng-scope > div > div > div.threads > div.threads-data-box > div.thread-details.ng-scope > div.thread-mails.ng-scope > div > div.mail-data > div.mail-content.ng-scope > div > i-frame > iframe",
-    copy: () => {
+    copy() {
         chrome.runtime.sendMessage({
             type: 'runtime-copy',
             userData: {
@@ -37,6 +37,7 @@ const gms = {
                 g_vent: jQuery(this.iframeData).contents().find("html").find('#g_vent').text(),
                 g_vent_color: jQuery(this.iframeData).contents().find("html").find('#g_vent_color').text(),
                 g_hardware: jQuery(this.iframeData).contents().find("html").find('#g_hardware').text(),
+                g_transport: jQuery(this.iframeData).contents().find("html").find('#g_transport').text(),
             }}
         );
     },
@@ -44,14 +45,13 @@ const gms = {
         chrome.runtime.sendMessage({
             type: 'runtime-paste'
         }, (userData) => {
-            console.log(userData);
             let selectorPrefix = 'div.vs-sidebar--items > section > div.p-6 > div > ';
             $(selectorPrefix + 'div:nth-child(1) > div > input').val(userData.g_name)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(2) > div > input').val(userData.g_company)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(4) > div > input').val(userData.g_address)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(5) > div > input').val(userData.g_postcode)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(6) > div > input').val(userData.g_city)[0].dispatchEvent(new Event('input'));
-            $(selectorPrefix + 'div:nth-child(7) > div > input').val('Niemcy')[0].dispatchEvent(new Event('input'));
+            $(selectorPrefix + 'div:nth-child(7) > div > input').val(userData.g_transport)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(8) > div > input').val(userData.g_phone)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(9) > div > input').val(userData.g_email)[0].dispatchEvent(new Event('input'));
         });
