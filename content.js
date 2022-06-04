@@ -5,39 +5,42 @@ const gms = {
     secondSelectChosenOption: "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div:nth-child(2) > div > div.vue-treeselect__menu-container > div > div > div:nth-child(1) > div > div > div > p",
     thirdSelect: "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div.mb-5 > div > div.vue-treeselect__control > div.vue-treeselect__value-container",
     thirdSelectChosenOption: "body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div > div.mb-5 > div > div.vue-treeselect__menu-container > div > div > div > div > div",
-    iframeData: "body > div.main.threads > div.content.ng-scope > div > div > div.threads > div.threads-data-box > div.thread-details.ng-scope > div.thread-mails.ng-scope > div > div.mail-data > div.mail-content.ng-scope > div > i-frame > iframe",
+    // iframeData: "body > div.main.threads > div.content.ng-scope > div > div > div.threads > div.threads-data-box > div.thread-details.ng-scope > div.thread-mails.ng-scope > div > div.mail-data > div.mail-content.ng-scope > div > i-frame > iframe",
+    g_xml: document.documentElement.outerHTML,
     copy() {
         chrome.runtime.sendMessage({
             type: 'runtime-copy',
             userData: {
-                g_name: jQuery(this.iframeData).contents().find("html").find('#g_name').text(),
-                g_lastname: jQuery(this.iframeData).contents().find("html").find('#g_lastname').text(),
-                g_company: jQuery(this.iframeData).contents().find("html").find('#g_company').text(),
-                g_land: jQuery(this.iframeData).contents().find("html").find('#g_land').text(),
-                g_postcode: jQuery(this.iframeData).contents().find("html").find('#g_postcode').text(),
-                g_city: jQuery(this.iframeData).contents().find("html").find('#g_city').text(),
-                g_address: jQuery(this.iframeData).contents().find("html").find('#g_address').text(),
-                g_phone: jQuery(this.iframeData).contents().find("html").find('#g_phone').text(),
-                g_fax: jQuery(this.iframeData).contents().find("html").find('#g_fax').text(),
-                g_email: jQuery(this.iframeData).contents().find("html").find('#g_email').text(),
-                g_productname: jQuery(this.iframeData).contents().find("html").find('#g_productname').text(),
-                g_productchoice: jQuery(this.iframeData).contents().find("html").find('#g_productchoice').text(),
-                g_width: jQuery(this.iframeData).contents().find("html").find('#g_width').text(),
-                g_height: jQuery(this.iframeData).contents().find("html").find('#g_height').text(),
-                g_montage: jQuery(this.iframeData).contents().find("html").find('#g_montage').text(),
-                g_embossing: jQuery(this.iframeData).contents().find("html").find('#g_embossing').text(),
-                g_insulation: jQuery(this.iframeData).contents().find("html").find('#g_insulation').text(),
-                g_division: jQuery(this.iframeData).contents().find("html").find('#g_division').text(),
-                g_opening: jQuery(this.iframeData).contents().find("html").find('#g_opening').text(),
-                g_threshold: jQuery(this.iframeData).contents().find("html").find('#g_threshold').text(),
-                g_shell: jQuery(this.iframeData).contents().find("html").find('#g_shell').text(),
-                g_frame: jQuery(this.iframeData).contents().find("html").find('#g_frame').text(),
-                g_window: jQuery(this.iframeData).contents().find("html").find('#g_window').text(),
-                g_window_color: jQuery(this.iframeData).contents().find("html").find('#g_window_color').text(),
-                g_vent: jQuery(this.iframeData).contents().find("html").find('#g_vent').text(),
-                g_vent_color: jQuery(this.iframeData).contents().find("html").find('#g_vent_color').text(),
-                g_hardware: jQuery(this.iframeData).contents().find("html").find('#g_hardware').text(),
-                g_transport: jQuery(this.iframeData).contents().find("html").find('#g_transport').text(),
+                g_name: jQuery(this.g_xml).contents().find('ZAPIS[co="zamowienia"] Nazw').text(),
+                g_company: ' ',
+                g_land: ' ',
+                g_postcode: jQuery(this.g_xml).contents().find('ZAPIS[co="zamowienia"] Kodp').text(),
+                g_city: jQuery(this.g_xml).contents().find('ZAPIS[co="zamowienia"] Mias').text(),
+                g_address: jQuery(this.g_xml).contents().find('ZAPIS[co="zamowienia"] Ulic').text(),
+                g_phone: jQuery(this.g_xml).contents().find('ZAPIS[co="zamowienia"] T1').text(),
+                g_fax: ' ',
+                g_email: jQuery(this.g_xml).contents().find('ZAPIS[co="zamowienia"] Mail').text(),
+                g_order_number: jQuery(this.g_xml).contents().find('ZAPIS[co="zamowienia"]').attr('NrR'),
+                // g_product: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim()),
+                g_productname: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[0].split('-').map(text => text.trim())[0],
+                g_productchoice: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[1].split(':').map(text => text.trim())[1],
+                g_width: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[2].split(':').map(text => text.trim())[1].split('x').map(text => text.trim())[0].replace(/[^\d.-]/g, ''),
+                g_height: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[2].split(':').map(text => text.trim())[1].split('x').map(text => text.trim())[1].replace(/[^\d.-]/g, ''),
+                g_montage: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[3].split(':').map(text => text.trim())[1],
+                g_embossing: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[4].split(':').map(text => text.trim())[1],
+                g_insulation: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[5].split(':').map(text => text.trim())[1],
+                g_division: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[6].split(':').map(text => text.trim())[1],
+                g_opening: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[7].split(':').map(text => text.trim())[1],
+                g_threshold: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[8].split(':').map(text => text.trim())[1],
+                g_shell: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[9].split(':').map(text => text.trim())[1],
+                g_frame: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[10].split(':').map(text => text.trim())[1],
+                g_window: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[11].split(':').map(text => text.trim())[1],
+                g_vent: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[12].split(':').map(text => text.trim())[1],
+                // g_hardware: jQuery(this.iframeData).contents().find("html").find('#g_hardware').text(),
+                g_handle: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[13].split(':').map(text => text.trim())[1],
+                g_transport: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[15].split(':').map(text => text.trim())[1],
+                g_sonstige: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[16].split(':').map(text => text.trim())[1],
+                g_anzahl: jQuery(this.g_xml).contents().find('ZAPIS[co="zamsy"] Nazw').text().split(/\r?\n/).map(text => text.trim())[17].split(':').map(text => text.trim())[1],
             }}
         );
     },
@@ -54,6 +57,8 @@ const gms = {
             $(selectorPrefix + 'div:nth-child(7) > div > input').val(userData.g_transport)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(8) > div > input').val(userData.g_phone)[0].dispatchEvent(new Event('input'));
             $(selectorPrefix + 'div:nth-child(9) > div > input').val(userData.g_email)[0].dispatchEvent(new Event('input'));
+            $(selectorPrefix + 'div:nth-child(9) > div > input').val(userData.g_email)[0].dispatchEvent(new Event('input'));
+            $(selectorPrefix + 'div.vs-component.vs-con-textarea.mt-5.w-full.vs-textarea-primary > textarea').val(userData.g_order_number)[0].dispatchEvent(new Event('input'));
         });
     },
     getQuerySelector: (target) => {
@@ -133,135 +138,156 @@ const gms = {
                 await this.simulateMouseClick('#feat23825');
             }
 
-            if(userData.g_shell === 'Verzinkt') {
-
-                await this.simulateMouseClick('#feat23775');
-                if(userData.g_frame === 'Mit') {
-                    await this.simulateMouseClick('#feat23792');
-                }
-
-            } else if(userData.g_shell === 'RAL 8017 Schokoladen braun (glänzend)') {
+            if(userData.g_shell.indexOf('8017') != '-1') {
 
                 await this.simulateMouseClick('#feat23799');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23821');
                 }
 
-            } else if(userData.g_shell === 'RAL 9006 Weißaluminium (glänzend)') {
+            } else if(userData.g_shell.indexOf('9006') != '-1') {
 
                 await this.simulateMouseClick('#feat23786');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23824');
                 }
 
-            } else if(userData.g_shell === 'RAL 9010 Reinweiß (glänzend)') {
+            } else if(userData.g_shell.indexOf('9010') != '-1') {
 
                 await this.simulateMouseClick('#feat23787');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23794');
                 }
 
-            } else if(userData.g_shell === 'RAL 6005 Moosgrün (glänzend)') {
+            } else if(userData.g_shell.indexOf('6005') != '-1') {
 
                 await this.simulateMouseClick('#feat23843');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23832');
                 }
 
-            } else if(userData.g_shell === 'RAL 7016 Anthrazitgrau (glänzend)') {
+            } else if(userData.g_shell.indexOf('7016') != '-1') {
 
                 await this.simulateMouseClick('#feat23774');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23788');
                 }
 
-            } else if(userData.g_shell === 'RAL 8004 Ziegelrot (glänzend)') {
+            } else if(userData.g_shell.indexOf('8004') != '-1') {
 
                 await this.simulateMouseClick('#feat23784');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23831');
                 }
 
-            } else if(userData.g_shell === 'RAL 3005 Kirsch (glänzend)') {
+            } else if(userData.g_shell.indexOf('3005') != '-1') {
 
                 await this.simulateMouseClick('#feat23813');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23816');
                 }
 
-            } else if(userData.g_shell === 'RAL 8017 Schokoladen braun (matt)') {
+            } else if(userData.g_shell.indexOf('8017') != '-1') {
 
                 await this.simulateMouseClick('#feat23812');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23821');
                 }
 
-            } else if(userData.g_shell === 'RAL 6020 Chromoxidgrün (matt)') {
+            } else if(userData.g_shell.indexOf('6020') != '-1') {
 
                 await this.simulateMouseClick('#feat23842');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23833');
                 }
 
-            } else if(userData.g_shell === 'RAL 7024 Graphitgrau (matt)') {
+            } else if(userData.g_shell.indexOf('7024') != '-1') {
 
                 await this.simulateMouseClick('#feat23814');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23819');
                 }
 
-            } else if(userData.g_shell === 'RAL 7035 Lichtgrau (glänzend)') {
+            } else if(userData.g_shell.indexOf('7035') != '-1') {
 
                 await this.simulateMouseClick('#feat23804');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23807');
                 }
 
-            } else if(userData.g_shell === 'Goldene Eiche (*)') {
+            } else if(userData.g_shell.indexOf('Goldene Eiche') != '-1') {
 
                 await this.simulateMouseClick('#feat23796');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23845');
                 }
 
-            } else if(userData.g_shell === 'Nussbaum') {
+            } else if(userData.g_shell.indexOf('Nussbaum') != '-1') {
 
                 await this.simulateMouseClick('#feat23838');
                 if(userData.g_frame === 'Mit') {
                     await this.simulateMouseClick('#feat23823');
                 }
 
+            } else if(userData.g_shell.indexOf('Verzinkt') != '-1') {
+
+                await this.simulateMouseClick('#feat23775');
+                if(userData.g_frame === 'Mit') {
+                    await this.simulateMouseClick('#feat23792');
+                }
+
             }
 
             if(userData.g_window != '0') {
-                if(userData.g_window_color === 'RAL 8003') {
+                if(userData.g_window.indexOf('8003') != '-1') {
                     await this.simulateMouseClick('#feat28132');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(1) > span > span:nth-child(4) > div > input').val(userData.g_window)[0].dispatchEvent(new Event('change'));
-                } else if(userData.g_window_color === 'RAL 9010') {
+                    if(userData.g_window.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(1) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
+                } else if(userData.g_window.indexOf('9010') != '-1') {
                     await this.simulateMouseClick('#feat23790');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(2) > span > span:nth-child(4) > div > input').val(userData.g_window)[0].dispatchEvent(new Event('change'));
-                } else if(userData.g_window_color === 'RAL 9005') {
+                    if(userData.g_window.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(2) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
+                } else if(userData.g_window.indexOf('9005') != '-1') {
                     await this.simulateMouseClick('#feat23844');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(3) > span > span:nth-child(4) > div > input').val(userData.g_window)[0].dispatchEvent(new Event('change'));
-                } else if(userData.g_window_color === 'RAL 8011') {
+                    if(userData.g_window.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(3) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
+                } else if(userData.g_window.indexOf('8011') != '-1') {
                     await this.simulateMouseClick('#feat23826');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(4) > span > span:nth-child(4) > div > input').val(userData.g_window)[0].dispatchEvent(new Event('change'));
-                } else if(userData.g_window_color === 'RAL 8017') {
+                    if(userData.g_window.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(4) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
+                } else if(userData.g_window.indexOf('8017') != '-1') {
                     await this.simulateMouseClick('#feat23800');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(5) > span > span:nth-child(4) > div > input').val(userData.g_window)[0].dispatchEvent(new Event('change'));
-                } else if(userData.g_window_color === 'RAL 7016') {
+                    if(userData.g_window.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(5) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
+                } else if(userData.g_window.indexOf('7016') != '-1') {
                     await this.simulateMouseClick('#feat23781');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(6) > span > span:nth-child(4) > div > input').val(userData.g_window)[0].dispatchEvent(new Event('change'));
+                    if(userData.g_window.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(7) > div > ul > li > ul > li:nth-child(6) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
                 }
             }
 
-            if(userData.g_vent != '0') {
-                if(userData.g_vent_color === 'Ja (braun)') {
+            if(userData.g_vent != 'Nein') {
+                if(userData.g_vent.indexOf('Braun') != '-1') {
                     await this.simulateMouseClick('#feat23839');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(4) > div > ul > li > ul > li:nth-child(2) > span > span:nth-child(4) > div > input').val(userData.g_vent)[0].dispatchEvent(new Event('change'));
-                } else if(userData.g_vent_color === 'Ja (Weiß)') {
+                    if(userData.g_vent.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(4) > div > ul > li > ul > li:nth-child(2) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
+                } else if(userData.g_vent.indexOf('Weiß') != '-1') {
                     await this.simulateMouseClick('#feat23772');
-                    $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(4) > div > ul > li > ul > li:nth-child(1) > span > span:nth-child(4) > div > input').val(userData.g_vent)[0].dispatchEvent(new Event('change'));
+                    if(userData.g_vent.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(4) > div > ul > li > ul > li:nth-child(1) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
+                }  else if(userData.g_vent.indexOf('Anthrazit') != '-1') {
+                    await this.simulateMouseClick('#feat28647');
+                    if(userData.g_vent.indexOf('2 Stück')) {
+                        $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(4) > div > ul > li > ul > li:nth-child(3) > span > span:nth-child(4) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+                    }
                 }
             }
 
@@ -269,8 +295,12 @@ const gms = {
                 await this.simulateMouseClick('#feat28048');
             }
 
+            // stopka
             await this.simulateMouseClick('#feat23847');
-            $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(6) > div > ul > li > ul > li:nth-child(6) > span > span:nth-child(3) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+            $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(6) > div > ul > li > ul > li:nth-child(1) > span > span:nth-child(3) > div > input').val('2')[0].dispatchEvent(new Event('change'));
+
+            // $('body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div.wx-row > table > tr:nth-child(10) > td > div > input').val(userData.g_anzahl)[0].dispatchEvent(new Event('change'));
+            // $('body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div.wx-row > table > tr:nth-child(12) > td > div > textarea').val(userData.g_sonstige)[0].dispatchEvent(new Event('input'));
 
         });
     }

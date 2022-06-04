@@ -2,6 +2,7 @@ const gms = {
     userData: {},
     copy: (message) => {
         this.userData = message.userData;
+        console.log(this.userData);
     },
     paste: () => {
         return this.userData;
