@@ -299,8 +299,8 @@ const gms = {
             await this.simulateMouseClick('#feat23847');
             $('body > div.vs-content-sidebar.add-new-data-sidebar.items-no-padding.font-medium > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(6) > div > ul > li > ul > li:nth-child(1) > span > span:nth-child(3) > div > input').val('2')[0].dispatchEvent(new Event('change'));
 
-            // $('body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div.wx-row > table > tr:nth-child(10) > td > div > input').val(userData.g_anzahl)[0].dispatchEvent(new Event('change'));
-            // $('body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div.wx-row > table > tr:nth-child(12) > td > div > textarea').val(userData.g_sonstige)[0].dispatchEvent(new Event('input'));
+            $('body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div.wx-row > table > tr:nth-child(10) > td > div > input').val(userData.g_anzahl)[0].dispatchEvent(new Event('change'));
+            $('body > div:nth-child(1) > div.vs-sidebar.vs-sidebar-primary.vs-sidebar-position-right > div.vs-sidebar--items > section > div.p-6 > div:nth-child(2) > div.wx-row > table > tr:nth-child(12) > td > div > textarea').val(userData.g_sonstige)[0].dispatchEvent(new Event('input'));
 
         });
     }
